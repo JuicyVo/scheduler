@@ -6,12 +6,14 @@ export default function InterviewerListItem(props) {
 
   const handleClick = () => {
     setSelected(!selected);
+    props.setInterviewer(props.id);
   };
 
   return (
     <li
       className={`interviewers__item ${selected ? "interviewers__item--selected" : ""}`}
-      onClick={handleClick}
+      onClick={handleClick}  
+
     >
       <img
         className="interviewers__item-image"
