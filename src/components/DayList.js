@@ -20,10 +20,14 @@ export default function  DayList(props) {
       name: "Wednesday",
       spots: 0,
     },
+
   ];
+  const setDay = (dayName) => {
+    console.log("Selected day:", dayName);
+  };
 
   const dayItems = days.map((day) => (
-    <DayListItem key={day.id} name={day.name} spots={day.spots} setDay={props.setDay}  />
+    <DayListItem key={day.id} name={day.name} spots={day.spots} selected={day.name === props.value} setDay={props.onChange}  />
   ));
 
   return <ul>{dayItems}</ul>;

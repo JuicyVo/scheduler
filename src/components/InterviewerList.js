@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import "styles/variables.scss";
+import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
-
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -11,28 +9,26 @@ const interviewers = [
   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
 ];
 
-const interviewerItems = interviewers.map((interviewer) => (
-<InterviewerListItem
-  key={interviewer.id}
-  id={interviewer.id}
-  name={interviewer.name}
-  avatar={interviewer.avatar}
-  selected={interviewer.id === interviewer}
-  setInterviewer ={interviewer.id} //ask for help later on why this doesnt log on the story
-/>
-))
-
-
 export default function InterviewerList(props) {
-  const { interviewers, setInterviewer, interviewer } = props;
+  const { setInterviewer, interviewer } = props;
+
+  const interviewerItems = interviewers.map((interviewer) => (
+    <InterviewerListItem
+      key={interviewer.id}
+      id={interviewer.id}
+      name={interviewer.name}
+      avatar={interviewer.avatar}
+      selected={interviewer.id === interviewer}
+      setInterviewer={() => setInterviewer(interviewer.id)}
+    />
+  ));
 
   return (
     <section className="interviewers">
-  <h4 className="interviewers__header text--light">Interviewer</h4>
-  <ul className="interviewers__list">{interviewerItems}</ul>
-  </section> 
-  )
-
+      <h4 className="interviewers__header text--light">Interviewer</h4>
+      <ul className="interviewers__list">{interviewerItems}</ul>
+    </section>
+  );
 }
 
 
