@@ -46,6 +46,34 @@ export function getAppointmentsForDay(state, day) {
 }
 
 
+export function getInterviewersForDay(state, day) {
+  const targetDay = state.days.find((d) => d.name === day);
+
+  if (!targetDay || !Array.isArray(targetDay.interviewers)) {
+    return [];
+  }
+
+  const interviewers = targetDay.interviewers.map((interviewerId) => {
+    return state.interviewers[interviewerId];
+  });
+
+  return interviewers;
+}
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+
+  const { student, interviewer } = interview;
+  const interviewerData = state.interviewers[interviewer];
+
+  return {
+    student,
+    interviewer: interviewerData
+  };
+}
+
 
 
 
@@ -73,4 +101,25 @@ export function getAppointmentsForDay(state, day) {
 // test("getAppointmentsForDay returns an empty array when the day is not found", () => {
 //   const result = getAppointmentsForDay(state, "Wednesday");
 //   expect(result.length).toEqual(0);
+// });
+
+
+
+// test("getInterview returns an object with the interviewer data", () => {
+//   const result = getInterview(state, state.appointments["3"].interview);
+//   expect(result).toEqual(
+//     expect.objectContaining({
+//       student: expect.any(String),
+//       interviewer: expect.objectContaining({
+//         id: expect.any(Number),
+//         name: expect.any(String),
+//         avatar: expect.any(String)
+//       })
+//     })
+//   );
+// });
+
+// test("getInterview returns null if no interview is booked", () => {
+//   const result = getInterview(state, state.appointments["2"].interview);
+//   expect(result).toBeNull();
 // });

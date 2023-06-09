@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
+import Appointment from '.';
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.student || '');
@@ -43,7 +44,8 @@ export default function Form(props) {
         <InterviewerList 
           interviewers={props.interviewers}
           interviewer={interviewer}
-          onSelectInterviewer={handleSelectInterviewer} // Pass the custom prop to handle interviewer selection
+          setInterviewer={handleSelectInterviewer}
+          // onSelectInterviewer={handleSelectInterviewer} // Pass the custom prop to handle interviewer selection
         />
       </section>
       <section className="appointment__card-right">
