@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Show(props) {
-  const { student, interviewer, onEdit, onDelete } = props;
+  const { student, interviewer, onEdit, onDelete} = props;
 
   return (
     <main className="appointment__card appointment__card--show">
@@ -20,6 +20,12 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
+            onClick={() => {
+              console.log("Edit button clicked");
+              onEdit();
+            }}
+      
+            
           />
           <img
             className="appointment__actions-button"

@@ -48,6 +48,7 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment,
     };
+
   
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
