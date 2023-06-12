@@ -23,17 +23,16 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false);
 
-
-const editInterview = () => {
-  setEditMode(prevEdit => !prevEdit)
-  transition(EDIT)
-}
+  const editInterview = () => {
+    setEditMode(prevEdit => !prevEdit);
+    transition(EDIT);
+  };
 
   const cancelInterview = () => {
-    transition(CONFIRM)
-  }
+    transition(CONFIRM);
+  };
 
   const confirmCancel = () => {
     transition(DELETING);
@@ -47,6 +46,7 @@ const editInterview = () => {
         console.log(error);
       });
   };
+
   const onAdd = () => {
     transition(CREATE);
   };
@@ -55,74 +55,73 @@ const editInterview = () => {
     const interview = {
       student: name,
       interviewer,
-    };  
-    transition(SAVING)
+    };
+
+    transition(SAVING);
 
     if (editMode) {
       // Update existing appointment
-      props
-        .bookInterview(props.id, interview)
+      props.bookInterview(props.id, interview)
         .then(() => {
           transition(SHOW);
           setEditMode(false); // Reset edit mode after saving
+          console.log ("hi")
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
+      props.bookInterview(props.id, interview) //this is causing issues
+        .then(() => {
+          transition(SHOW);
+          console.log(props.id, interview);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
-
-
-
-    props.bookInterview(props.id, interview); //fix this later dowens show right transition
-    transition(SHOW);
-    console.log(props.id, interview)}}
-  
-
-    return (
-      <article className="appointment">
-        <Header time={props.time} />
-        {editMode ? (
-          <Form
-            interviewers={props.interviewers}
-            onCancel={() => setEditMode(false)}
-            onSave={save}
-            interview={props.interview}
-          />
-        ) : (
-          <>
-            {props.interview ? (
-              <Show
-                student={props.interview.student}
-                interviewer={props.interview.interviewer}
-                onDelete={() => cancelInterview(props.id)}
-                onEdit={editInterview}
-              />
-            ) : (
-              <Empty onAdd={onAdd} />
-            )}
-          </>
-        )}
-        {mode === CREATE && (
-          <Form
-            interviewers={props.interviewers}
-            onCancel={back}
-            onSave={save}
-          />
-        )}
-        {mode === SAVING && <Status message="Saving..." />}
-        {mode === DELETING && <Status message="Deleting..." />}
-        {mode === CONFIRM && (
-          <Confirm
-            message="Are you sure you want to delete this?"
-            onConfirm={confirmCancel}
-            onCancel={back}
-          />
-        )}
-      </article>
-    );
-  
-    
-        }
-    
-    
+  return (
+    <article className="appointment">
+      <Header time={props.time} />
+      {editMode ? (
+        <Form
+          interviewers={props.interviewers}
+          onCancel={() => setEditMode(false)}
+          onSave={save}
+          interview={props.interview}
+        />
+      ) : (
+        <>
+          {props.interview ? (
+            <Show
+              student={props.interview.student}
+              interviewer={props.interview.interviewer}
+              onDelete={() => cancelInterview(props.id)}
+              onEdit={editInterview}
+            />
+          ) : (
+            <Empty onAdd={onAdd} />
+          )}
+        </>
+      )}
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          onCancel={back}
+          onSave={save}
+        />
+      )}
+      {mode === SAVING && <Status message="Saving..." />}
+      {mode === DELETING && <Status message="Deleting..." />}
+      {mode === CONFIRM && (
+        <Confirm
+          message="Are you sure you want to delete this?"
+          onConfirm={confirmCancel}
+          onCancel={back}
+        />
+      )}
+    </article>
+  );
+}
