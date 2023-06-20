@@ -17,6 +17,9 @@ const SAVING ="SAVING"
 const DELETING ="DELETING"
 const CONFIRM ="CONFIRM"
 const EDIT = "EDIT"
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
+
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -43,7 +46,7 @@ export default function Appointment(props) {
         console.log("deleted");
       })
       .catch((error) => {
-        console.log(error);
+        transition(ERROR_DELETE, true);
       });
   };
 
@@ -65,10 +68,9 @@ export default function Appointment(props) {
         .then(() => {
           transition(SHOW);
           setEditMode(false); // Reset edit mode after saving
-          console.log ("hi")
         })
         .catch((error) => {
-          console.log(error);
+          transition(ERROR_SAVE, true);
         });
     } else {
       props.bookInterview(props.id, interview) //this is causing issues

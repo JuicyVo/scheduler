@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types"
 import InterviewerListItem from "./InterviewerListItem";
+import { types } from "@storybook/addons";
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -13,6 +15,7 @@ export default function InterviewerList(props) {
   const { setInterviewer, interviewer } = props;
 
   const interviewerItems = interviewers.map((interviewerData) => (
+    
     <InterviewerListItem
       key={interviewerData.id}
       id={interviewerData.id}
@@ -31,10 +34,7 @@ export default function InterviewerList(props) {
   );
 }
 
+InterviewerList.propTypes= {
+  interviewers:PropTypes.array.isRequired
+}
 
-
-// Our <InterviewerList> receives three props:
-
-// interviewers:array - an array of objects as seen above
-// setInterviewer:function - a function that accepts an interviewer id. This function will simply be passed down to the <InterviewerListItem>
-// interviewer:number - a number that represents the id of the currently selected interviewer
