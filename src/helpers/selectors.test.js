@@ -7,12 +7,15 @@ test("getInterview returns an object with the interviewer data", () => {
       "3": {
         interview: {
           student: "John Doe",
-          interviewer: {
-            id: 1,
-            name: "Interviewer 1",
-            avatar: "https://example.com/avatar.png",
-          },
+          interviewer: 1, // Assuming 1 is a valid interviewer ID
         },
+      },
+    },
+    interviewers: {
+      1: {
+        id: 1,
+        name: "Interviewer 1",
+        avatar: "https://example.com/avatar.png",
       },
     },
   };
@@ -29,6 +32,7 @@ test("getInterview returns an object with the interviewer data", () => {
     })
   );
 });
+
 
 test("getInterview returns null if no interview is booked", () => {
   const state = {

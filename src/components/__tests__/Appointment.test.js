@@ -2,6 +2,7 @@
   We are rendering `<Application />` down below, so we need React.createElement
 */
 import React from "react";
+import Appointment from "components/Appointment";
 
 /*
   We import our helper functions from the react-testing-library

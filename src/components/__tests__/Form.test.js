@@ -2,7 +2,7 @@ import React from "react";
 
 import { fireEvent } from "@testing-library/react";
 
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, getByTestId } from "@testing-library/react";
 
 import Form from "components/Appointment/Form";
 
@@ -28,9 +28,10 @@ describe("Form", () => {
 
   it("renders with initial student name", () => {
     const { getByTestId } = render(
-      <Form interviewers={interviewers} name="Lydia Miller-Jones" />
+      <Form interviewers={interviewers} student="Lydia Miller-Jones" />
     );
-    expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
+    const inputElement = getByTestId("student-name-input");
+    expect(inputElement).toHaveValue("Lydia Miller-Jones");
   });
 
   it("validates that the student name is not blank", () => {
@@ -53,7 +54,7 @@ describe("Form", () => {
 
     fireEvent.click(getByText("Save"));
 
-    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    expect(getByText(/Student name cannot be blank/i)).toBeInTheDocument();
     expect(onSave).not.toHaveBeenCalled();
 
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {

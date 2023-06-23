@@ -52,7 +52,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       
       .then(() => {
         const days = updateSpots(state.day, state.days, appointments); //temp
@@ -75,7 +75,7 @@ export default function useApplicationData() {
     };
 
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       .then(() => {
         const days = updateSpots(state.day, state.days, appointments);
         setState((prev) => ({
@@ -90,9 +90,9 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get('http://localhost:8001/api/days'),
-      axios.get('http://localhost:8001/api/appointments'),
-      axios.get('http://localhost:8001/api/interviewers')
+      axios.get('/api/days'),
+      axios.get('/api/appointments'),
+      axios.get('/api/interviewers')
     ])
       .then((all) => {
         const days = all[0].data;
@@ -111,7 +111,7 @@ export default function useApplicationData() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [state.day, state.appointments, state.days]);
+  }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
 }
