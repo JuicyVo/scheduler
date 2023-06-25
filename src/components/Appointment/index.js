@@ -71,6 +71,7 @@ export default function Appointment(props) {
         })
         .catch((error) => {
           transition(ERROR_SAVE, true);
+          console.log (error)
         });
     } else {
       props.bookInterview(props.id, interview) //this is causing issues

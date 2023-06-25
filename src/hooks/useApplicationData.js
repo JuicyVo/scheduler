@@ -59,6 +59,7 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev,
           appointments,
+          days,
         }));
         console.log(id, interview);
       });
@@ -81,6 +82,7 @@ export default function useApplicationData() {
         setState((prev) => ({
           ...prev,
           appointments,
+          days,
         }));
       })
       .catch((error) => {
