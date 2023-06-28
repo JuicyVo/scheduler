@@ -20,6 +20,31 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
+  useEffect(() => {
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments'),
+      axios.get('/api/interviewers')
+    ])
+      .then((all) => {
+        const days = all[0].data;
+        const appointments = all[1].data;
+        const interviewers = all[2].data;
+        const dailyAppointments = getAppointmentsForDay({ days, appointments }, state.day);
+
+        setState((prev) => ({
+          ...prev,
+          days,
+          appointments,
+          interviewers,
+          dailyAppointments,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
   const updateSpots = (day, days, appointments) => {
@@ -61,7 +86,8 @@ export default function useApplicationData() {
           appointments,
           days,
         }));
-        console.log(id, interview);
+        // console.log(id, interview);
+    
       });
   };
 
@@ -85,35 +111,12 @@ export default function useApplicationData() {
           days,
         }));
       })
-      .catch((error) => {
+      .catch((error) => { //this crashes a test
         console.error("Error deleting appointment:", error);
       });
   };
 
-  useEffect(() => {
-    Promise.all([
-      axios.get('/api/days'),
-      axios.get('/api/appointments'),
-      axios.get('/api/interviewers')
-    ])
-      .then((all) => {
-        const days = all[0].data;
-        const appointments = all[1].data;
-        const interviewers = all[2].data;
-        const dailyAppointments = getAppointmentsForDay({ days, appointments }, state.day);
 
-        setState((prev) => ({
-          ...prev,
-          days,
-          appointments,
-          interviewers,
-          dailyAppointments,
-        }));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
 }

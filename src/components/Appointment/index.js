@@ -9,6 +9,7 @@ import Application from "components/Application"
 import Status from "./Status"
 import { useState } from "react"
 import Confirm from "./Confirm"
+import Error from "./Error"
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -34,24 +35,27 @@ export default function Appointment(props) {
   };
 
   const cancelInterview = () => {
-    transition(CONFIRM);
+    transition(CONFIRM, true);
   };
 
   const confirmCancel = () => {
-    transition(DELETING);
+    transition(DELETING, true);
     return props
       .cancelInterview(props.id)
       .then(() => {
-        transition(EMPTY);
+        transition(EMPTY,true);
         console.log("deleted");
       })
       .catch((error) => {
+        console.log("ERROR")
         transition(ERROR_DELETE, true);
+      
+        
       });
   };
 
   const onAdd = () => {
-    transition(CREATE);
+    transition(CREATE, true);
   };
 
   const save = (name, interviewer) => {
@@ -66,21 +70,26 @@ export default function Appointment(props) {
       // Update existing appointment
       props.bookInterview(props.id, interview)
         .then(() => {
-          transition(SHOW);
+          transition(SHOW, true);
+          
           setEditMode(false); // Reset edit mode after saving
         })
         .catch((error) => {
+          console.log(error);
           transition(ERROR_SAVE, true);
-          console.log (error)
+          
         });
     } else {
-      props.bookInterview(props.id, interview) //this is causing issues
+      props.bookInterview(props.id, interview) 
         .then(() => {
-          transition(SHOW);
           console.log(props.id, interview);
+          transition(SHOW,true);
+    
         })
         .catch((error) => {
           console.log(error);
+          transition(ERROR_SAVE, true);
+     
         });
     }
   };
@@ -91,7 +100,10 @@ export default function Appointment(props) {
       {editMode ? (
         <Form
           interviewers={props.interviewers}
-          onCancel={() => setEditMode(false)}
+          onCancel={() => {
+            setEditMode(false); 
+            back()
+          }}
           onSave={save}
           interview={props.interview}
         />
@@ -117,6 +129,8 @@ export default function Appointment(props) {
         />
       )}
       {mode === SAVING && <Status message="Saving..." />}
+      {mode === ERROR_DELETE && <Error message="Deleting Error" />}
+      {mode === ERROR_SAVE && <Error message="Saving Error" />}
       {mode === DELETING && <Status message="Deleting..." />}
       {mode === CONFIRM && (
         <Confirm

@@ -101,9 +101,10 @@ export default {
     }),
     post: jest.fn(url => {
       // if (url === "/api/appointments") {
-        return Promise.resolve({
+        return Promise.reject({
           status: 200,
           statusText: "No Content",
+          
         });
       })
 }
