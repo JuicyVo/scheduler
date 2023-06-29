@@ -111,9 +111,9 @@ export default function useApplicationData() {
           days,
         }));
       })
-      .catch((error) => { //this crashes a test
-        console.error("Error deleting appointment:", error);
-      });
+      // .catch((error) => { //this crashes a test
+      //   console.error("Error deleting appointment:", error);
+      // });
   };
 
 

@@ -153,14 +153,16 @@ describe("Application", () => {
     expect(getByText(appointment, "Deleting...")).toBeInTheDocument();
     //console.log(prettyDOM(appointment))
       console.log(prettyDOM(appointment))
+      
     await waitForElement(() => getByText(appointment, "Deleting Error"));
+    
 
   });
   
 
   it("shows the save error when failing to save an appointment", async () => {
     // axios.post.mockRejectedValueOnce(new Error("Save failed"));
-    axios.post.mockRejectedValueOnce();
+    axios.put.mockRejectedValueOnce();
     const { container, debug } = render(<Application />);
     
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -178,7 +180,9 @@ describe("Application", () => {
     expect(getByText(appointment, "Saving...")).toBeInTheDocument();
     console.log(prettyDOM(appointment))
     // await waitForElementToBeRemoved(() => getByText("Saving..."));
+    // expect(getByText(appointment, "Saving Error")).toBeInTheDocument();
     await waitForElement(() => getByText(appointment, "Saving Error"));
+    expect(getByText(appointment, "Saving Error")).toBeInTheDocument();
 
 
 
