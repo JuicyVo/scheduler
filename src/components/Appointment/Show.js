@@ -20,6 +20,7 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
+            data-testid="edit"
             onClick={() => {
               console.log("Edit button clicked");
               onEdit();
