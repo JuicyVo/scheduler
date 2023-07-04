@@ -1,8 +1,11 @@
 # Interview Scheduler
+With this application you can book, edit, and cancel appointments
+![BaseUrl](./docs/baseUrl.png)
+![EditForm](./docs/editForm.png)
 
 ## Setup
 
-Install dependencies with `npm install`.
+To get started, please install the project dependencies by running the following command:
 
 ## Running Webpack Development Server
 
@@ -21,3 +24,4 @@ npm test
 ```sh
 npm run storybook
 ```
+
