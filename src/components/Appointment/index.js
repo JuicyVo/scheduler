@@ -35,7 +35,7 @@ console.log ("mode is", mode)
   };
 
   const cancelInterview = () => {
-    transition(CONFIRM, true);
+    transition(CONFIRM);
   };
 
   const confirmCancel = () => {
