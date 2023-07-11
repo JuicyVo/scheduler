@@ -122,18 +122,18 @@ console.log ("mode is", mode)
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}
-          // onCancel={back}
-          onCancel={() => {
-            console.log("cancel");
-            back()
-            console.log("cancel2");
-          }}
+          onCancel={back}
+          // onCancel={() => {
+          //   back()
+          value= {{}}
+          // }}
           onSave={save}
         />
+    
       )}
       {mode === SAVING && <Status message="Saving..." />}
-      {mode === ERROR_DELETE && <Error message="Deleting Error" />}
-      {mode === ERROR_SAVE && <Error message="Saving Error" />}
+      {mode === ERROR_DELETE && <Error message="Deleting Error" onClick={back}/>}
+      {mode === ERROR_SAVE && <Error message="Saving Error" onClick={back}/>}
       {mode === DELETING && <Status message="Deleting..." />}
       {mode === CONFIRM && (
         <Confirm
@@ -145,3 +145,4 @@ console.log ("mode is", mode)
     </article>
   );
 }
+
