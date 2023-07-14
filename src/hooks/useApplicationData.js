@@ -1,12 +1,8 @@
 
 import "components/Application.scss";
 import React, { useState, useEffect } from "react";
-import DayList from "../components/DayList";
-import InterviewerListItem from "../components/InterviewerListItem";
-import InterviewerList from "../components/InterviewerList";
-import Appointment from "../components/Appointment";
 import axios from "axios";
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import { getAppointmentsForDay} from "helpers/selectors";
 
 
 

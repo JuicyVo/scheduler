@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"
 import InterviewerListItem from "./InterviewerListItem";
-import { types } from "@storybook/addons";
+
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
