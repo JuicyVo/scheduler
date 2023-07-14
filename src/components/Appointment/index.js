@@ -25,7 +25,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-console.log ("mode is", mode)
+
   const [editMode, setEditMode] = useState(false);
 
   const editInterview = () => {
@@ -43,11 +43,12 @@ console.log ("mode is", mode)
       .cancelInterview(props.id)
       .then(() => {
         transition(EMPTY,true);
-        console.log("deleted");
+    
       })
       .catch((error) => {
-        console.log("ERROR")
+  
         transition(ERROR_DELETE, true);
+        setEditMode(prevEdit => !prevEdit)
       
         
       });
@@ -65,7 +66,6 @@ console.log ("mode is", mode)
 
     transition(SAVING);
 
-    // if (editMode) {
       // Update existing appointment
       props.bookInterview(props.id, interview)
         .then(() => {
@@ -74,23 +74,11 @@ console.log ("mode is", mode)
           // setEditMode(false); // Reset edit mode after saving
         })
         .catch((error) => {
-          console.log(error);
+         
           transition(ERROR_SAVE, true);
-          
+          setEditMode(prevEdit => !prevEdit)
         });
-    // } else {
-    //   props.bookInterview(props.id, interview) 
-    //     .then(() => {
-    //       console.log(props.id, interview);
-    //       transition(SHOW,true);
-    
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       transition(ERROR_SAVE, true);
-     
-    //     });
-    // }
+   
   };
 
   return (
@@ -123,10 +111,7 @@ console.log ("mode is", mode)
         <Form
           interviewers={props.interviewers}
           onCancel={back}
-          // onCancel={() => {
-          //   back()
           value= {{}}
-          // }}
           onSave={save}
         />
     
