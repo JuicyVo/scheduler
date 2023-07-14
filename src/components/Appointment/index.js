@@ -115,6 +115,7 @@ console.log ("mode is", mode)
       student: props.interview.student,
       interviewer: props.interview.interviewer.id,
     }}
+    setInterviewer={props.interview.interviewer} 
   />
 
 )}

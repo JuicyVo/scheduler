@@ -3,17 +3,21 @@ import classNames from "classnames";
 import "../components/InterviewerListItem.scss";
 
 export default function InterviewerListItem(props) {
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState(props.selected || false);
 
   const handleClick = () => {
     setSelected(!selected);
     props.setInterviewer(props.id);
   };
 
+  const interviewerClass = classNames({
+    "interviewers__item": true,
+    "interviewers__item--selected": selected,
+  });
 
-
-  const interviewerClass = selected ? "interviewers__item--selected" : "interviewers__item";
-
+  if (props.selected !== selected) {
+    setSelected(props.selected);
+  }
 
   return (
     <li className={interviewerClass} onClick={handleClick}>

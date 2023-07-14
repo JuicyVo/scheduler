@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import InterviewerList from 'components/InterviewerList';
 import Button from 'components/Button';
-import Appointment from '.';
+
 
 export default function Form(props) {
   const [student, setStudent] = useState(props.value.student || '');
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(props.value.interviewer || null);
+
   const [error, setError] = useState("");
 
   const handleSave = () => {
@@ -15,7 +16,7 @@ export default function Form(props) {
   const reset = () => {
     setStudent('');
     setInterviewer(null);
-    setError(""); // Clear the error on successful submission
+    setError(""); 
   };
   const cancel = () => {
     reset();
@@ -63,7 +64,7 @@ export default function Form(props) {
           interviewers={props.interviewers}
           interviewer={interviewer}
           setInterviewer={handleSelectInterviewer}
-          onSelectInterviewer={handleSelectInterviewer} // Pass the custom prop to handle interviewer selection
+          selected={props.value.interviewer === interviewer.id} 
         />
       </section>
       <section className="appointment__card-right">
