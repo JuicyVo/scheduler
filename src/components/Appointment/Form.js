@@ -9,11 +9,11 @@ export default function Form(props) {
 
   const [error, setError] = useState("");
 
- 
+
   const reset = () => {
     setStudent('');
     setInterviewer(null);
-    setError(""); 
+    setError("");
   };
   const cancel = () => {
     reset();
@@ -54,11 +54,11 @@ export default function Form(props) {
           />
         </form>
         <section className="appointment__validation">{error}</section>
-        <InterviewerList 
+        <InterviewerList
           interviewers={props.interviewers}
           interviewer={interviewer}
           setInterviewer={handleSelectInterviewer}
-          selected={props.value.interviewer === interviewer.id} 
+          selected={props.value.interviewer === interviewer.id}
         />
       </section>
       <section className="appointment__card-right">

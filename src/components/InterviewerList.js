@@ -15,7 +15,7 @@ export default function InterviewerList(props) {
   const { setInterviewer, interviewer } = props;
 
   const interviewerItems = interviewers.map((interviewerData) => (
-    
+
     <InterviewerListItem
       key={interviewerData.id}
       id={interviewerData.id}
@@ -34,7 +34,7 @@ export default function InterviewerList(props) {
   );
 }
 
-InterviewerList.propTypes= {
-  interviewers:PropTypes.array.isRequired
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
 }
 

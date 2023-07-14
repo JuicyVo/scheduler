@@ -2,11 +2,7 @@
 import "components/Application.scss";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getAppointmentsForDay} from "helpers/selectors";
-
-
-
-
+import { getAppointmentsForDay } from "helpers/selectors";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -53,12 +49,12 @@ export default function useApplicationData() {
           }
           return count;
         }, 0);
-  
+
         return { ...dayItem, spots };
       }
       return dayItem;
     });
-  
+
     return updatedDays;
   };
 
@@ -74,7 +70,7 @@ export default function useApplicationData() {
 
     return axios
       .put(`/api/appointments/${id}`, { interview })
-      
+
       .then(() => {
         const days = updateSpots(state.day, state.days, appointments); //temp
         setState((prev) => ({
@@ -83,7 +79,7 @@ export default function useApplicationData() {
           days,
         }));
         // console.log(id, interview);
-    
+
       });
   };
 
@@ -107,9 +103,9 @@ export default function useApplicationData() {
           days,
         }));
       })
-      // .catch((error) => { //this crashes a test
-      //   console.error("Error deleting appointment:", error);
-      // });
+    // .catch((error) => { //this crashes a test
+    //   console.error("Error deleting appointment:", error);
+    // });
   };
 
 
